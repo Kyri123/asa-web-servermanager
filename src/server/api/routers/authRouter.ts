@@ -55,7 +55,7 @@ export const authRouter = createTRPCRouter({
 					return rows[0];
 				});
 
-			if (!userTest) throw new TRPCError({ code: 'BAD_REQUEST', message: 'User already exsists!' });
+			if (!!userTest) throw new TRPCError({ code: 'BAD_REQUEST', message: 'User already exsists!' });
 			const { password, seed } = encryptPassword(input.password);
 
 			const result = await db.select({ count: sql<number>`count(*)` }).from(users);

@@ -45,7 +45,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 									backgroundSize: 'cover',
 									backgroundPosition: 'center'
 								}}>
-								<div className='absolute left-1/2 top-1/2 translate-x-1/2 translate-y-1/2'>{children}</div>
+								<div className='fixed inset-0 z-10 w-screen overflow-y-auto'>
+									<div className='flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0'>
+										<div className='relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8'>
+											{children}
+										</div>
+									</div>
+								</div>
 							</div>
 						)}
 					</div>

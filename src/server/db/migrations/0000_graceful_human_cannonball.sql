@@ -12,8 +12,6 @@ CREATE TABLE `user` (
 	`password` varchar(255) NOT NULL,
 	`seed` varchar(255) NOT NULL,
 	`image` varchar(255),
-	`created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	`updatedAt` timestamp ON UPDATE CURRENT_TIMESTAMP,
 	`lastLogin` timestamp,
 	CONSTRAINT `user_id` PRIMARY KEY(`id`)
 );

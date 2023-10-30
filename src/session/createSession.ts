@@ -27,7 +27,9 @@ export async function createSession(user: User, expiresIn = '7d') {
 
 	// set cookie with token
 	const cookieStore = cookies();
-	cookieStore.set('session', token, {
+	cookieStore.set({
+		name: 'session',
+		value: token,
 		path: '/',
 		maxAge: 60 * 60 * 24 * 7
 	});

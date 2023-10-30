@@ -4,6 +4,7 @@ import fs from 'fs';
 import mysql from 'mysql2/promise';
 import * as schema from './schema';
 
+import { join } from 'path';
 import { env } from '~/env.mjs';
 
 const poolConnection = mysql.createPool({
@@ -20,8 +21,11 @@ export const db = drizzle(poolConnection, {
 });
 
 (async () => {
-	if (!fs.existsSync('./migration')) return;
-	await migrate(db, { migrationsFolder: './migration' });
+	const folder = join(process.cwd(), 'src', 'server', 'db', 'migrations');
+	console.log('Migrating database...');
+	if (!fs.existsSync(folder)) return console.log('No migrations folder found!', folder);
+	await migrate(db, { migrationsFolder: folder });
+	console.log('Database migrated!');
 })().catch((err) => {
 	console.error(err);
 	process.exit(1);

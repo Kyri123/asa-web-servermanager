@@ -1,7 +1,7 @@
 {
 	"version": "5",
 	"dialect": "mysql",
-	"id": "5f78d203-f925-455e-906d-ffb367a5f03b",
+	"id": "0d4928f6-147c-471c-8c36-ff80aac1db3f",
 	"prevId": "00000000-0000-0000-0000-000000000000",
 	"tables": {
 		"permission": {
@@ -83,22 +83,6 @@
 					"primaryKey": false,
 					"notNull": false,
 					"autoincrement": false
-				},
-				"created_at": {
-					"name": "created_at",
-					"type": "timestamp",
-					"primaryKey": false,
-					"notNull": true,
-					"autoincrement": false,
-					"default": "CURRENT_TIMESTAMP"
-				},
-				"updatedAt": {
-					"name": "updatedAt",
-					"type": "timestamp",
-					"primaryKey": false,
-					"notNull": false,
-					"autoincrement": false,
-					"onUpdate": true
 				},
 				"lastLogin": {
 					"name": "lastLogin",
