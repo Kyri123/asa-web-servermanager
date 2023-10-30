@@ -13,7 +13,7 @@ jobs:
             DATABASE_USER: 'root'
             DATABASE_PASSWORD: ''
             DATABASE_DB: 'asa_web_servermanager'
-            JWT_SECRET_KEY: 'workflow'
+            JWT_SECRET_KEY: 'workflowwithascretkey'
         steps:
             - uses: actions/checkout@v3
             - name: Setup Node.js
