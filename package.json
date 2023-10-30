@@ -15,8 +15,6 @@
 		"hook:db": "pnpm run db:generate"
 	},
 	"dependencies": {
-		"@auth/drizzle-adapter": "^0.3.2",
-		"@planetscale/database": "^1.11.0",
 		"@t3-oss/env-nextjs": "^0.7.0",
 		"@tanstack/react-query": "^4.36.1",
 		"@trpc/client": "^10.37.1",
@@ -26,7 +24,6 @@
 		"drizzle-orm": "^0.28.6",
 		"flowbite": "^2.0.0",
 		"flowbite-react": "^0.6.4",
-		"husky": "^8.0.3",
 		"jwt-decode": "^4.0.0",
 		"next": "^14.0.0",
 		"node-powershell": "^5.0.1",
@@ -51,6 +48,7 @@
 		"drizzle-kit": "^0.19.13",
 		"eslint": "^8.47.0",
 		"eslint-config-next": "^13.5.4",
+		"husky": "^8.0.3",
 		"jsonwebtoken": "^9.0.2",
 		"mysql2": "^3.6.1",
 		"postcss": "^8.4.27",
