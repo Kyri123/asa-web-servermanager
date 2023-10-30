@@ -5,7 +5,7 @@ import { type Permission } from '~/permissions';
 import { createTRPCRouter } from '~/server/api/trpc';
 import { db, permission, users } from '~/server/db';
 import { comparePassword, encryptPassword } from '~/server/utils/auth';
-import { createSession } from '~/session';
+import { createSession } from '~/session/createSession';
 import { publicProcedure } from './../trpc';
 
 export const authRouter = createTRPCRouter({

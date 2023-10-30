@@ -1,5 +1,5 @@
 export const metadata = {
-	title: 'ASA-WSM | Dashboard'
+	title: 'ASA-WSM | Sign Up'
 };
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;

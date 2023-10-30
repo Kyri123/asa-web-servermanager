@@ -4,7 +4,7 @@ import superjson from 'superjson';
 import { ZodError } from 'zod';
 
 import { db } from '~/server/db';
-import { getSession } from '~/session';
+import { getSession } from '~/session/getSession';
 
 interface CreateContextOptions {
 	headers: Headers;
@@ -44,7 +44,7 @@ export const createTRPCRouter = t.router;
 export const publicProcedure = t.procedure;
 
 const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
-	if (!ctx.session || !ctx.session.username) {
+	if (!ctx.session?.username) {
 		throw new TRPCError({ code: 'UNAUTHORIZED' });
 	}
 	return next({

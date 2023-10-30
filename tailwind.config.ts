@@ -2,7 +2,7 @@
 
 /** @type {import('tailwindcss').Config} */
 const config = {
-	content: ['./node_modules/flowbite-react/**/*.js', './src/**/*.{ts,tsx}', './public/**/*.html'],
+	content: ['./node_modules/flowbite-react/**/*.{ts,tsx,js}', './src/**/*.{ts,tsx}', './public/**/*.html'],
 	theme: {
 		extend: {}
 	},
