@@ -6,8 +6,8 @@ on:
             - main
 
 jobs:
-    install:
-        runs-on: ubuntu-latest
+    prepare-and-build-app:
+        runs-on: windows-latest
         env:
             DATABASE_HOST: 'localhost'
             DATABASE_USER: 'root'
@@ -15,7 +15,7 @@ jobs:
             DATABASE_DB: 'asa_web_servermanager'
             JWT_SECRET_KEY: 'workflowwithascretkey'
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v2
             - name: Setup Node.js
               uses: actions/setup-node@v3
               with:
@@ -30,16 +30,5 @@ jobs:
               shell: bash
               run: |
                   echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-            - uses: actions/cache@v3
-              name: Setup pnpm cache
-              with:
-                  path: ${{ env.STORE_PATH }}
-                  key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-                  restore-keys: |
-                      ${{ runner.os }}-pnpm-store-
-            - name: install dependencies
-              run: pnpm i
-            - name: lint next app
-              run: pnpm lint
-            - name: build next app
-              run: pnpm build
+            - name: prepare steam cmd
+              run: .\prepare.ps1
