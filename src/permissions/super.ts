@@ -4,7 +4,7 @@ const perms: PermissionElement[] = [
 	{
 		name: 'Super',
 		description: 'Super User with all permissions',
-		permission: Permission.Super
+		permission: Permission.SuperAdmin
 	}
 ];
 

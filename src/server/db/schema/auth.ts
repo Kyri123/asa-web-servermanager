@@ -22,7 +22,7 @@ export const usersRelation = relations(users, ({ many }) => ({
 
 export type User = typeof users.$inferSelect;
 export type NewUser = typeof users.$inferInsert;
-export type SessionUser = User & { permissions: Permission[] };
+export type SessionUser = Omit<User, 'password' | 'seed'> & { permissions: Permission[] };
 
 export const permission = mysqlTable('permission', {
 	id: bigint('id', { mode: 'number' }).primaryKey().autoincrement(),

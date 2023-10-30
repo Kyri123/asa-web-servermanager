@@ -1,7 +1,7 @@
 import mainAdmin from './super';
 
 export enum Permission {
-	Super = 'super'
+	SuperAdmin = 'super'
 }
 
 export type PermissionElement = {

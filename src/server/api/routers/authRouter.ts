@@ -1,7 +1,7 @@
 import { TRPCError } from '@trpc/server';
 import { eq, or, sql } from 'drizzle-orm';
 import { z } from 'zod';
-import { Permission } from '~/permissions';
+import { type Permission } from '~/permissions';
 import { createTRPCRouter } from '~/server/api/trpc';
 import { db, permission, users } from '~/server/db';
 import { comparePassword, encryptPassword } from '~/server/utils/auth';
@@ -59,7 +59,7 @@ export const authRouter = createTRPCRouter({
 			const { password, seed } = encryptPassword(input.password);
 
 			const result = await db.select({ count: sql<number>`count(*)` }).from(users);
-			const permissions = result[0]?.count && result[0]?.count > 0 ? [] : [Permission.Super];
+			const permissions = result[0]?.count && result[0]?.count > 0 ? [] : ['super'];
 
 			await db.insert(users).values({
 				username: input.username,
@@ -84,7 +84,7 @@ export const authRouter = createTRPCRouter({
 					permissions.map((perm) => {
 						return db.insert(permission).values({
 							userId: user.id,
-							permission: perm
+							permission: perm as Permission
 						});
 					})
 				);

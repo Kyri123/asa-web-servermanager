@@ -6,9 +6,11 @@ import { env } from '~/env.mjs';
 import { db } from '~/server/db';
 import { permission, type SessionUser, type User } from '~/server/db/schema/auth';
 
-export function getSession(): SessionUser | null {
-	const cookieStore = cookies();
-	const token = cookieStore.get('session')?.value;
+export function getSession(token?: string): SessionUser | null {
+	if (!token) {
+		const cookieStore = cookies();
+		token = cookieStore.get('session')?.value;
+	}
 	if (!token) return null;
 
 	if (window !== undefined) {
@@ -37,8 +39,12 @@ export async function createSession(user: User, expiresIn = '7d') {
 			return rows.map((row) => row.permission);
 		});
 
+	// we don't want to send the password or seed to the client
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const { password, seed, ...userdata } = user;
+
 	// create token
-	const token = jwt.sign({ ...user, permissions }, env.JWT_SECRET_KEY, {
+	const token = jwt.sign({ ...userdata, permissions }, env.JWT_SECRET_KEY, {
 		expiresIn
 	});
 
