@@ -9,6 +9,12 @@ on:
 jobs:
     install:
         runs-on: ubuntu-latest
+        env:
+            DATABASE_HOST: 'localhost'
+            DATABASE_USER: 'root'
+            DATABASE_PASSWORD: ''
+            DATABASE_DB: 'asa_web_servermanager'
+            JWT_SECRET_KEY: 'workflow'
         steps:
             - uses: actions/checkout@v3
             - name: Setup Node.js
