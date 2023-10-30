@@ -1,13 +1,13 @@
 {
-  "version": "5",
-  "dialect": "mysql",
-  "entries": [
-    {
-      "idx": 0,
-      "version": "5",
-      "when": 1698672441998,
-      "tag": "0000_glossy_surge",
-      "breakpoints": true
-    }
-  ]
+	"version": "5",
+	"dialect": "mysql",
+	"entries": [
+		{
+			"idx": 0,
+			"version": "5",
+			"when": 1698672441998,
+			"tag": "0000_glossy_surge",
+			"breakpoints": true
+		}
+	]
 }
