@@ -11,17 +11,20 @@ export function getSession(token?: string): SessionUser | null {
 	}
 	if (!token) return null;
 
-	if (window !== undefined) {
-		try {
-			return jwtDecode<SessionUser>(token);
-		} catch (err) {
-			return null;
+	try {
+		if (window !== undefined) {
+			try {
+				return jwtDecode<SessionUser>(token);
+			} catch (err) {
+				return null;
+			}
 		}
-	}
+	} catch (err) {}
 
 	try {
 		return jwt.verify(token, env.JWT_SECRET_KEY) as SessionUser;
 	} catch (err) {
+		console.log(err);
 		return null;
 	}
 }

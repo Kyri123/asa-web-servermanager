@@ -33,4 +33,6 @@ export async function createSession(user: User, expiresIn = '7d') {
 		path: '/',
 		maxAge: 60 * 60 * 24 * 7
 	});
+
+	console.log(cookies());
 }

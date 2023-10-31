@@ -8,7 +8,7 @@ CREATE TABLE `server` (
 	CONSTRAINT `server_query_port_unique` UNIQUE(`query_port`),
 	CONSTRAINT `server_game_port_unique` UNIQUE(`game_port`),
 	CONSTRAINT `server_rcon_port_unique` UNIQUE(`rcon_port`)
-);
+); 
 --> statement-breakpoint
 CREATE TABLE `server_schedule_settings` (
 	`id` bigint AUTO_INCREMENT NOT NULL,

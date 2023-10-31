@@ -25,8 +25,9 @@
 			"~db/*": ["../src/server/db/*"],
 			"~env": ["../src/env.cjs"]
 		},
-		"outDir": "../dist"
+		"outDir": "../dist",
+		"plugins": [{ "name": "next" }]
 	},
 	"include": ["../src/env.cjs", "../src/server/db/**/*.ts", "**/*.ts", "**/*.tsx", "**/*.cjs", "**/*.mjs"],
-	"exclude": ["../node_modules"]
+	"exclude": ["../node_modules", "../.next"]
 }

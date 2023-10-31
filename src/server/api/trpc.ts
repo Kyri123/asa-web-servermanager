@@ -11,7 +11,6 @@ interface CreateContextOptions {
 }
 
 export const createInnerTRPCContext = (opts: CreateContextOptions) => {
-	console.log(opts.headers);
 	const session = getSession();
 
 	return {

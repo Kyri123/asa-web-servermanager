@@ -11,7 +11,7 @@
 		"db:studio": "dotenv drizzle-kit studio",
 		"db:generate": "dotenv drizzle-kit generate:mysql",
 		"dev": "nodemon",
-		"dev:run": "ts-node --project ./backend/tsconfig.json ./backend/src/index.ts",
+		"dev:run": "ts-node --transpile-only --project ./backend/tsconfig.json ./backend/src/index.ts",
 		"start": "ts-node --transpile-only --project ./backend/tsconfig.json ./backend/src/index.ts",
 		"prepare": "husky install",
 		"hook:prettier": "prettier --write .",
