@@ -24,8 +24,8 @@ jobs:
               with:
                   node-version: '18'
                   cache: 'pnpm'
-            - name: run prepare script
-              run: .\prepare.ps1
             - name: run lint
               run: |
                   pnpm run lint
+            - name: run prepare script
+              run: .\prepare.ps1
