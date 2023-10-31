@@ -1,9 +1,8 @@
 import { TRPCError } from '@trpc/server';
 import { eq, or, sql } from 'drizzle-orm';
 import { z } from 'zod';
-import { type Permission } from '~/permissions';
 import { createTRPCRouter } from '~/server/api/trpc';
-import { db, permission, users } from '~/server/db';
+import { db, permission, users, type Permission } from '~/server/db';
 import { comparePassword, encryptPassword } from '~/server/utils/auth';
 import { createSession } from '~/session/createSession';
 import { publicProcedure } from './../trpc';

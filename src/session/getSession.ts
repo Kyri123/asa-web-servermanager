@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { jwtDecode } from 'jwt-decode';
 import { cookies } from 'next/headers';
-import { env } from '~/env.mjs';
+import { env } from '~/env.cjs';
 import { type SessionUser } from '~/server/db/schema/auth';
 
 export function getSession(token?: string): SessionUser | null {

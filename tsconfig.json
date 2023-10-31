@@ -23,5 +23,5 @@
 		"plugins": [{ "name": "next" }]
 	},
 	"include": [".eslintrc.cjs", "next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.cjs", "**/*.mjs", ".next/types/**/*.ts", ".prettierrc"],
-	"exclude": ["node_modules"]
+	"exclude": ["node_modules", "./backend", "./dist"]
 }

@@ -1,4 +1,5 @@
-import { Permission, type PermissionElement } from './index';
+import { Permission } from '~/server/db';
+import { type PermissionElement } from './index';
 
 const perms: PermissionElement[] = [
 	{

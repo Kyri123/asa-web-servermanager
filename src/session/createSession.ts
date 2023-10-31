@@ -1,7 +1,7 @@
 import { eq } from 'drizzle-orm';
 import jwt from 'jsonwebtoken';
 import { cookies } from 'next/headers';
-import { env } from '~/env.mjs';
+import { env } from '~/env.cjs';
 import { db } from '~/server/db';
 import { permission, type User } from '~/server/db/schema/auth';
 

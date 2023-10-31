@@ -4,12 +4,14 @@
 	"private": true,
 	"scripts": {
 		"build": "next build",
+		"build:next": "next build",
+		"build:backend": "ttsc --project backend/tsconfig.json",
 		"lint": "next lint",
 		"db:push": "dotenv drizzle-kit push:mysql",
 		"db:studio": "dotenv drizzle-kit studio",
 		"db:generate": "dotenv drizzle-kit generate:mysql",
-		"dev": "next dev",
-		"start": "next start",
+		"dev": "ts-node --project ./backend/tsconfig.json ./backend/src/index.ts",
+		"start": "ts-node --transpile-only --project ./backend/tsconfig.json ./backend/src/index.ts",
 		"prepare": "husky install",
 		"hook:prettier": "prettier --write .",
 		"hook:db": "pnpm run db:generate"
@@ -21,6 +23,8 @@
 		"@trpc/next": "^10.37.1",
 		"@trpc/react-query": "^10.37.1",
 		"@trpc/server": "^10.37.1",
+		"cross-env": "^7.0.3",
+		"dotenv": "^16.3.1",
 		"drizzle-orm": "^0.28.6",
 		"flowbite": "^2.0.0",
 		"flowbite-react": "^0.6.4",
@@ -56,7 +60,12 @@
 		"prettier-plugin-organize-imports": "^3.2.3",
 		"prettier-plugin-tailwindcss": "^0.5.1",
 		"tailwindcss": "^3.3.3",
-		"typescript": "^5.2.2"
+		"ts-node": "^10.9.1",
+		"tsconfig-paths": "^4.2.0",
+		"tslib": "^2.6.2",
+		"ttsc": "^0.3.1",
+		"typescript": "^5.2.2",
+		"typescript-transform-paths": "^3.4.6"
 	},
 	"ct3aMetadata": {
 		"initVersion": "7.22.0"

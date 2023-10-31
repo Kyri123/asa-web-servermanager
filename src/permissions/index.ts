@@ -1,8 +1,5 @@
+import { type Permission } from '~/server/db';
 import mainAdmin from './super';
-
-export enum Permission {
-	SuperAdmin = 'super'
-}
 
 export type PermissionElement = {
 	name: string;

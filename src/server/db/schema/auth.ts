@@ -1,6 +1,8 @@
 import { relations } from 'drizzle-orm';
 import { bigint, mysqlTable, timestamp, varchar } from 'drizzle-orm/mysql-core';
-import { type Permission } from '~/permissions';
+export enum Permission {
+	SuperAdmin = 'super'
+}
 
 export const users = mysqlTable('user', {
 	id: bigint('id', { mode: 'number' }).primaryKey().autoincrement(),
