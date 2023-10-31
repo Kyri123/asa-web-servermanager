@@ -1,32 +1,25 @@
-/** @type {import("eslint").Linter.Config} */
-const config = {
-	parser: '@typescript-eslint/parser',
-	parserOptions: {
-		project: true
+module.exports = {
+	root: true,
+	env: {
+		browser: true,
+		node: true
 	},
-	plugins: ['@typescript-eslint'],
-	extends: ['next/core-web-vitals', 'plugin:@typescript-eslint/recommended-type-checked', 'plugin:@typescript-eslint/stylistic-type-checked'],
+	parser: 'vue-eslint-parser',
+	parserOptions: {
+		parser: '@typescript-eslint/parser'
+	},
+	extends: ['@nuxtjs/eslint-config-typescript', 'plugin:prettier/recommended'],
+	plugins: ['unused-imports'],
 	rules: {
-		'@typescript-eslint/no-explicit-any': 'off',
-		'@typescript-eslint/no-unsafe-assignment': 'off',
-		'@typescript-eslint/array-type': 'off',
-		'@typescript-eslint/consistent-type-definitions': 'off',
-
-		'@typescript-eslint/consistent-type-imports': [
-			'warn',
-			{
-				prefer: 'type-imports',
-				fixStyle: 'inline-type-imports'
-			}
-		],
-		'@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
-		'@typescript-eslint/no-misused-promises': [
-			2,
-			{
-				checksVoidReturn: { attributes: false }
-			}
-		]
+		'@typescript-eslint/consistent-type-imports': 'error',
+		'vue/no-deprecated-slot-attribute': 'off',
+		'spaced-comment': 'off',
+		'vue/no-multiple-template-root': 'off',
+		'import/order': 'off',
+		'@typescript-eslint/no-unused-vars': 'off',
+		'unused-imports/no-unused-imports': 'error',
+		'unused-imports/no-unused-vars': ['warn', { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' }],
+		'prettier/prettier': 'off',
+		'vue/multi-word-component-names': 'off'
 	}
 };
-
-module.exports = config;
