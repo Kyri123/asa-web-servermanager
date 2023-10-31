@@ -21,4 +21,4 @@ git stash
 git fetch
 git checkout dev --force
 git pull
-pnpm install
+.\prepare.ps1
