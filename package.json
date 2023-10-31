@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"build": "nuxi build",
-		"lint": "nuxi lint && nuxi typecheck",
+		"lint": "eslint . --fix && nuxi typecheck",
 		"db:push": "dotenv drizzle-kit push:mysql",
 		"db:studio": "dotenv drizzle-kit studio",
 		"db:generate": "dotenv drizzle-kit generate:mysql",
@@ -57,6 +57,7 @@
 		"drizzle-kit": "^0.19.13",
 		"eslint": "^8.47.0",
 		"eslint-config-next": "^13.5.4",
+		"eslint-config-prettier": "^9.0.0",
 		"eslint-plugin-prettier": "^5.0.1",
 		"husky": "^8.0.3",
 		"jsonwebtoken": "^9.0.2",
@@ -67,7 +68,8 @@
 		"prettier-plugin-organize-imports": "^3.2.3",
 		"prettier-plugin-tailwindcss": "^0.5.1",
 		"tailwindcss": "^3.3.3",
-		"typescript": "^5.2.2"
+		"typescript": "^5.2.2",
+		"vue-tsc": "^1.8.22"
 	},
 	"ct3aMetadata": {
 		"initVersion": "7.22.0"

@@ -32,3 +32,8 @@ jobs:
                   echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
             - name: prepare steam cmd
               run: .\prepare.ps1
+            - name: run build
+              run: |
+                  pnpm i
+                  pnpm run lint
+                  pnpm run build
