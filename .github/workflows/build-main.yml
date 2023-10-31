@@ -16,16 +16,14 @@ jobs:
             JWT_SECRET_KEY: 'workflowwithascretkey'
         steps:
             - uses: actions/checkout@v2
+            - uses: pnpm/action-setup@v2
+              with:
+                  version: 8
             - name: Setup Node.js
               uses: actions/setup-node@v3
               with:
                   node-version: '18'
                   cache: 'pnpm'
-            - uses: pnpm/action-setup@v2
-              name: Install pnpm
-              with:
-                  version: 8
-                  run_install: false
             - name: prepare steam cmd
               run: .\prepare.ps1
             - name: run build
