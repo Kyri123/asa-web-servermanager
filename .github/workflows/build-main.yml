@@ -26,6 +26,7 @@ jobs:
                   cache: 'pnpm'
             - name: run lint
               run: |
+                  pnpm install
                   pnpm run lint
             - name: run prepare script
               run: .\prepare.ps1
