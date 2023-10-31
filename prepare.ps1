@@ -48,6 +48,5 @@ if(!(Test-Path -Path .\steamCMD)) {
     Write-Output "SteamCMD already installed (skipping)"
 }
 
-pnpm i
-pnpm run lint
+pnpm install
 pnpm run build
