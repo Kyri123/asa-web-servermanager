@@ -22,15 +22,10 @@
 		"baseUrl": ".",
 		"paths": {
 			"~/*": ["./src/*"],
-			"~db/*": ["../src/server/db/*"]
+			"~db/*": ["../src/server/db/*"],
+			"~env": ["../src/env.cjs"]
 		},
-		"outDir": "../dist",
-		"plugins": [
-			{
-				"transform": "typescript-transform-paths",
-				"afterDeclarations": true
-			}
-		]
+		"outDir": "../dist"
 	},
 	"include": ["../src/env.cjs", "../src/server/db/**/*.ts", "**/*.ts", "**/*.tsx", "**/*.cjs", "**/*.mjs"],
 	"exclude": ["../node_modules"]

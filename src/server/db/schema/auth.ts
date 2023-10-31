@@ -1,5 +1,6 @@
 import { relations } from 'drizzle-orm';
-import { bigint, mysqlTable, timestamp, varchar } from 'drizzle-orm/mysql-core';
+import { bigint, boolean, mysqlTable, timestamp, varchar } from 'drizzle-orm/mysql-core';
+import { serverActions } from './serverActions';
 export enum Permission {
 	SuperAdmin = 'super'
 }
@@ -11,11 +12,13 @@ export const users = mysqlTable('user', {
 	password: varchar('password', { length: 255 }).notNull(),
 	seed: varchar('seed', { length: 255 }).notNull(),
 	image: varchar('image', { length: 255 }),
-	lastLogin: timestamp('lastLogin')
+	lastLogin: timestamp('last_login'),
+	accountDisabled: boolean('account_disabled').default(false)
 });
 
 export const usersRelation = relations(users, ({ many }) => ({
-	permissions: many(permission)
+	permissions: many(permission),
+	actions: many(serverActions)
 }));
 
 export type User = typeof users.$inferSelect;

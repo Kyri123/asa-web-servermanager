@@ -9,7 +9,8 @@ exports.env = createEnv({
 		DATABASE_USER: z.string().default('root'),
 		DATABASE_PASSWORD: z.string().default(''),
 		DATABASE_DB: z.string().default('asa_web_servermanager'),
-		JWT_SECRET_KEY: z.string().min(16)
+		JWT_SECRET_KEY: z.string().min(16),
+		PORT: z.number().min(1).max(65535)
 	},
 
 	client: {},
@@ -20,7 +21,8 @@ exports.env = createEnv({
 		DATABASE_USER: process.env.DATABASE_USER,
 		DATABASE_PASSWORD: process.env.DATABASE_PASSWORD,
 		DATABASE_DB: process.env.DATABASE_DB,
-		JWT_SECRET_KEY: process.env.JWT_SECRET_KEY
+		JWT_SECRET_KEY: process.env.JWT_SECRET_KEY,
+		PORT: parseInt(process.env.PORT ?? '3000')
 	},
 
 	skipValidation: !!process.env.SKIP_ENV_VALIDATION,

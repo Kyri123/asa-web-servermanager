@@ -7,15 +7,18 @@ import { createServer } from 'http';
 import next from 'next';
 import { parse } from 'url';
 import { migrateDb } from '~/db';
+import { env } from '~env';
+import { scheduleManager } from './schedule';
 
 const dev = process.env.NODE_ENV !== 'production';
-const port = 3000;
+const port = env.PORT;
 
 const app = next({ dev, port });
 const handle = app.getRequestHandler();
 
 (async () => {
 	await migrateDb();
+	await scheduleManager.init();
 	app.prepare().then(() => {
 		createServer(async (req, res) => {
 			try {
