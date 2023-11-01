@@ -1,7 +1,7 @@
 import { type Config } from 'drizzle-kit';
 
 export default {
-	schema: './src/server/db/schema',
+	schema: './server/utils/db/schema',
 	driver: 'mysql2',
 	out: './server/migrations',
 	dbCredentials: {

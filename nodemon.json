@@ -1,7 +1,0 @@
-{
-	"verbose": true,
-	"watch": ["./backend/**/*", "./src/env.cjs", "./src/server/db"],
-	"ignore": [".git", "node_modules", "dist"],
-	"ext": "ts",
-	"exec": "pnpm run dev:run"
-}
