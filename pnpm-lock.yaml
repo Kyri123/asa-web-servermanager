@@ -41,6 +41,9 @@ dependencies:
     eslint-plugin-unused-imports:
         specifier: ^3.0.0
         version: 3.0.0(@typescript-eslint/eslint-plugin@6.9.0)(eslint@8.52.0)
+    h3:
+        specifier: ^1.8.2
+        version: 1.8.2
     jwt-decode:
         specifier: ^4.0.0
         version: 4.0.0
