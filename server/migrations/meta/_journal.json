@@ -15,6 +15,13 @@
 			"when": 1698756377084,
 			"tag": "0001_chief_ben_grimm",
 			"breakpoints": true
+		},
+		{
+			"idx": 2,
+			"version": "5",
+			"when": 1699028046881,
+			"tag": "0002_happy_hammerhead",
+			"breakpoints": true
 		}
 	]
 }

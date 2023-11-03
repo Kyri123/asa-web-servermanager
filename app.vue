@@ -1,6 +1,11 @@
 <script setup lang="ts">
+	import { ModalsContainer } from 'vue-final-modal';
+
 	useHead({
-		title: 'ASA-WM'
+		title: 'ASA-WM',
+		htmlAttrs: {
+			class: 'nuxt-ui-scrollbars'
+		}
 	});
 
 	// init basic storage
@@ -14,4 +19,5 @@
 	</NuxtLayout>
 
 	<UNotifications />
+	<ModalsContainer />
 </template>

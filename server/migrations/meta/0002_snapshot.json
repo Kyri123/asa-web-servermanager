@@ -1,0 +1,524 @@
+{
+	"version": "5",
+	"dialect": "mysql",
+	"id": "d98ebcee-ba4b-47cc-8cfa-da21ff6886b6",
+	"prevId": "ac3bc078-4504-4f08-89ae-800c583f95b9",
+	"tables": {
+		"permission": {
+			"name": "permission",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "bigint",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": true
+				},
+				"user_id": {
+					"name": "user_id",
+					"type": "bigint",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"permission": {
+					"name": "permission",
+					"type": "varchar(255)",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {
+				"permission_id": {
+					"name": "permission_id",
+					"columns": ["id"]
+				}
+			},
+			"uniqueConstraints": {}
+		},
+		"user": {
+			"name": "user",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "bigint",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": true
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar(255)",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"email": {
+					"name": "email",
+					"type": "varchar(255)",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"password": {
+					"name": "password",
+					"type": "varchar(255)",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"seed": {
+					"name": "seed",
+					"type": "varchar(255)",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"last_login": {
+					"name": "last_login",
+					"type": "timestamp",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false,
+					"default": "CURRENT_TIMESTAMP"
+				},
+				"account_disabled": {
+					"name": "account_disabled",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false,
+					"default": false
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {
+				"user_id": {
+					"name": "user_id",
+					"columns": ["id"]
+				}
+			},
+			"uniqueConstraints": {}
+		},
+		"server": {
+			"name": "server",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "bigint",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": true
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar(255)",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"query_port": {
+					"name": "query_port",
+					"type": "int",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"game_port": {
+					"name": "game_port",
+					"type": "int",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"rcon_port": {
+					"name": "rcon_port",
+					"type": "int",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {
+				"server_id": {
+					"name": "server_id",
+					"columns": ["id"]
+				}
+			},
+			"uniqueConstraints": {
+				"server_query_port_unique": {
+					"name": "server_query_port_unique",
+					"columns": ["query_port"]
+				},
+				"server_game_port_unique": {
+					"name": "server_game_port_unique",
+					"columns": ["game_port"]
+				},
+				"server_rcon_port_unique": {
+					"name": "server_rcon_port_unique",
+					"columns": ["rcon_port"]
+				}
+			}
+		},
+		"server_schedule_settings": {
+			"name": "server_schedule_settings",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "bigint",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": true
+				},
+				"server_id": {
+					"name": "server_id",
+					"type": "bigint",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"update_enabled": {
+					"name": "update_enabled",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false,
+					"default": true
+				},
+				"update_frequency": {
+					"name": "update_frequency",
+					"type": "varchar(255)",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false,
+					"default": "'*/15 * * * *'"
+				},
+				"restart_alert_enabled": {
+					"name": "restart_alert_enabled",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false,
+					"default": true
+				},
+				"restart_enabled": {
+					"name": "restart_enabled",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false,
+					"default": false
+				},
+				"restart_frequency": {
+					"name": "restart_frequency",
+					"type": "varchar(255)",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false,
+					"default": "'0 4 * * *'"
+				},
+				"backups_enabled": {
+					"name": "backups_enabled",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false,
+					"default": true
+				},
+				"backups_frequency": {
+					"name": "backups_frequency",
+					"type": "varchar(255)",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false,
+					"default": "'0 */2 * * *'"
+				},
+				"backups_alert_enabled": {
+					"name": "backups_alert_enabled",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false,
+					"default": true
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {
+				"server_schedule_settings_server_id_server_id_fk": {
+					"name": "server_schedule_settings_server_id_server_id_fk",
+					"tableFrom": "server_schedule_settings",
+					"tableTo": "server",
+					"columnsFrom": ["server_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "no action"
+				}
+			},
+			"compositePrimaryKeys": {
+				"server_schedule_settings_id": {
+					"name": "server_schedule_settings_id",
+					"columns": ["id"]
+				}
+			},
+			"uniqueConstraints": {
+				"server_schedule_settings_server_id_unique": {
+					"name": "server_schedule_settings_server_id_unique",
+					"columns": ["server_id"]
+				}
+			}
+		},
+		"server_settings": {
+			"name": "server_settings",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "bigint",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": true
+				},
+				"server_id": {
+					"name": "server_id",
+					"type": "bigint",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"map": {
+					"name": "map",
+					"type": "varchar(255)",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"max_players": {
+					"name": "max_players",
+					"type": "smallint",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {
+				"server_settings_server_id_server_id_fk": {
+					"name": "server_settings_server_id_server_id_fk",
+					"tableFrom": "server_settings",
+					"tableTo": "server",
+					"columnsFrom": ["server_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "no action"
+				}
+			},
+			"compositePrimaryKeys": {
+				"server_settings_id": {
+					"name": "server_settings_id",
+					"columns": ["id"]
+				}
+			},
+			"uniqueConstraints": {
+				"server_settings_server_id_unique": {
+					"name": "server_settings_server_id_unique",
+					"columns": ["server_id"]
+				}
+			}
+		},
+		"server_actions": {
+			"name": "server_actions",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "bigint",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": true
+				},
+				"server_id": {
+					"name": "server_id",
+					"type": "bigint",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"action": {
+					"name": "action",
+					"type": "varchar(255)",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"state": {
+					"name": "state",
+					"type": "varchar(255)",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"message": {
+					"name": "message",
+					"type": "varchar(255)",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false,
+					"default": "'Waiting for next execution and free runner...'"
+				},
+				"parameters": {
+					"name": "parameters",
+					"type": "varchar(255)",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false,
+					"default": "'[]'"
+				},
+				"canceled": {
+					"name": "canceled",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false,
+					"default": false
+				},
+				"user_id": {
+					"name": "user_id",
+					"type": "bigint",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {
+				"server_actions_server_id_server_id_fk": {
+					"name": "server_actions_server_id_server_id_fk",
+					"tableFrom": "server_actions",
+					"tableTo": "server",
+					"columnsFrom": ["server_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "no action"
+				},
+				"server_actions_user_id_user_id_fk": {
+					"name": "server_actions_user_id_user_id_fk",
+					"tableFrom": "server_actions",
+					"tableTo": "user",
+					"columnsFrom": ["user_id"],
+					"columnsTo": ["id"],
+					"onDelete": "set null",
+					"onUpdate": "no action"
+				}
+			},
+			"compositePrimaryKeys": {
+				"server_actions_id": {
+					"name": "server_actions_id",
+					"columns": ["id"]
+				}
+			},
+			"uniqueConstraints": {
+				"server_actions_server_id_unique": {
+					"name": "server_actions_server_id_unique",
+					"columns": ["server_id"]
+				}
+			}
+		},
+		"server_mods": {
+			"name": "server_mods",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "bigint",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": true
+				},
+				"server_id": {
+					"name": "server_id",
+					"type": "bigint",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"mod_id": {
+					"name": "mod_id",
+					"type": "int",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"is_map_mod": {
+					"name": "is_map_mod",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false,
+					"default": false
+				},
+				"mod_name": {
+					"name": "mod_name",
+					"type": "varchar(255)",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"need_update": {
+					"name": "need_update",
+					"type": "boolean",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false,
+					"default": false
+				},
+				"last_update": {
+					"name": "last_update",
+					"type": "timestamp",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {
+				"server_mods_server_id_server_id_fk": {
+					"name": "server_mods_server_id_server_id_fk",
+					"tableFrom": "server_mods",
+					"tableTo": "server",
+					"columnsFrom": ["server_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "no action"
+				}
+			},
+			"compositePrimaryKeys": {
+				"server_mods_id": {
+					"name": "server_mods_id",
+					"columns": ["id"]
+				}
+			},
+			"uniqueConstraints": {
+				"server_mods_server_id_unique": {
+					"name": "server_mods_server_id_unique",
+					"columns": ["server_id"]
+				}
+			}
+		}
+	},
+	"schemas": {},
+	"_meta": {
+		"schemas": {},
+		"tables": {},
+		"columns": {}
+	}
+}

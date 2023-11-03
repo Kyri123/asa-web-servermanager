@@ -51,7 +51,7 @@
 </script>
 
 <template>
-	<form class="w-96 rounded border bg-slate-100 p-5 dark:border-slate-600 dark:bg-slate-700" @submit.prevent="doLogin">
+	<form class="w-96 rounded border bg-gray-100 p-5 dark:border-gray-800 dark:bg-gray-900" @submit.prevent="doLogin">
 		<span class="text-2xl font-semibold">Sign In</span>
 		<UButton
 			class="float-right"

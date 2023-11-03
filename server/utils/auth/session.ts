@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default-member */
 /* eslint-disable unused-imports/no-unused-vars */
 import { eq } from 'drizzle-orm';
 import type { EventHandlerRequest, H3Event } from 'h3';
@@ -38,6 +39,7 @@ export async function createSession(event: H3Event<EventHandlerRequest>, user: U
 		expiresIn: `${expiresIn}d`
 	});
 
+	await db.update(users).set({ lastLogin: new Date() }).where(eq(users.id, user.id));
 	setCookie(event, 'token', token, { expires: moment().add(expiresIn, 'days').toDate() });
 }
 

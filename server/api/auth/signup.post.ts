@@ -2,7 +2,7 @@ import { eq, or, sql } from 'drizzle-orm';
 import { z } from 'zod';
 import { encryptPassword } from '~/server/utils/auth/password';
 import { createSession } from '~/server/utils/auth/session';
-import type { Permission } from '~/types/enum';
+import type { Permission } from '~/utils/enum';
 
 export default defineEventHandler(async (event) => {
 	const input = z
