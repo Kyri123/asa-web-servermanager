@@ -1,16 +1,14 @@
 import { type Config } from 'drizzle-kit';
 
-import { env } from '~/env.cjs';
-
 export default {
-	schema: './src/server/db/schema',
+	schema: './server/utils/db/schema',
 	driver: 'mysql2',
-	out: './backend/src/db/migrations',
+	out: './server/migrations',
 	dbCredentials: {
-		host: env.DATABASE_HOST,
-		user: env.DATABASE_USER,
-		database: env.DATABASE_DB,
-		password: env.DATABASE_PASSWORD
-	},
-	tablesFilter: ['asa-web-servermanager_*']
+		host: process.env.DATABASE_HOST!,
+		port: parseInt(process.env.DATABASE_PORT!),
+		user: process.env.DATABASE_USER!,
+		database: process.env.DATABASE_DB!,
+		password: process.env.DATABASE_PASSWORD!
+	}
 } satisfies Config;

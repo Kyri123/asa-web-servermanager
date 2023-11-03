@@ -20,15 +20,10 @@ jobs:
               uses: actions/setup-node@v3
               with:
                   node-version: '18'
-                  registry-url: 'https://registry.npmjs.org'
-            - uses: pnpm/action-setup@v2
-              name: Install pnpm
-              with:
-                  version: 8
-                  run_install: false
-            - name: Get pnpm store directory
-              shell: bash
+                  cache: 'yarn'
+            - name: run lint
               run: |
-                  echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-            - name: prepare steam cmd
+                  yarn
+                  yarn run lint
+            - name: run prepare script
               run: .\prepare.ps1

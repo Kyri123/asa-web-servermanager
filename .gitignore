@@ -47,3 +47,5 @@ yarn-error.log*
 
 # backend build
 dist
+.output
+.nuxt

@@ -24,14 +24,14 @@ if(!(CommandExists "npm")) {
     Write-Output "npm already installed (skipping)"
 }
 
-if(!(CommandExists "pnpm")) {
-    Write-Host -NoNewLine 'PNPM is not installed. Would you like to install it?';
+if(!(CommandExists "yarn")) {
+    Write-Host -NoNewLine 'yarn is not installed. Would you like to install it?';
     $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
 
-    Write-Output "Installing pnpm"
-    npm install -g pnpm
+    Write-Output "Installing yarn"
+    npm install -g yarn
 } else {
-    Write-Output "pnpm already installed (skipping)"
+    Write-Output "yarn already installed (skipping)"
 }
 
 if(!(Test-Path -Path .\steamCMD)) {
@@ -48,6 +48,5 @@ if(!(Test-Path -Path .\steamCMD)) {
     Write-Output "SteamCMD already installed (skipping)"
 }
 
-pnpm i
-pnpm run lint
-pnpm run build
+yarn
+yarn run build
