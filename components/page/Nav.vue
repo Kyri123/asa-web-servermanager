@@ -10,7 +10,7 @@
 		{
 			label: 'User Management',
 			icon: 'i-heroicons-users',
-			to: '/users'
+			to: '/user/management'
 		}
 	];
 
@@ -18,7 +18,7 @@
 		{
 			label: 'Server Management',
 			icon: 'i-heroicons-server',
-			to: '/servers'
+			to: '/server/management'
 		}
 	];
 

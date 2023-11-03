@@ -26,7 +26,7 @@
 					<div class="col-span-3 overflow-y-scroll">
 						<PageNav />
 					</div>
-					<div class="col-span-9 overflow-y-auto">
+					<div class="col-span-9 overflow-y-auto p-2">
 						<slot />
 					</div>
 				</div>

@@ -2,16 +2,17 @@ import { eq, or, sql } from 'drizzle-orm';
 import { z } from 'zod';
 import { encryptPassword } from '~/server/utils/auth/password';
 import { createSession } from '~/server/utils/auth/session';
-import type { Permission } from '~/utils/enum';
+import { getBody } from '~/server/utils/requestHelper';
+import { Permission } from '~/utils/enum';
+
+const bodySchema = z.object({
+	username: z.string().min(4),
+	password: z.string().min(8),
+	email: z.string().email()
+});
 
 export default defineEventHandler(async (event) => {
-	const input = z
-		.object({
-			username: z.string().min(4),
-			password: z.string().min(8),
-			email: z.string().email()
-		})
-		.parse(await readBody(event));
+	const input = await getBody(event, bodySchema);
 
 	const userTest = await db
 		.select()
@@ -26,7 +27,7 @@ export default defineEventHandler(async (event) => {
 	const { password, seed } = encryptPassword(input.password);
 
 	const result = await db.select({ count: sql<number>`count(*)` }).from(users);
-	const permissions = result[0]?.count && result[0]?.count > 0 ? [] : ['super'];
+	const permissions = result[0]?.count && result[0]?.count > 0 ? [] : [Permission.ADMIN];
 
 	await db.insert(users).values({
 		username: input.username,

@@ -34,7 +34,7 @@ export const permission = mysqlTable('permission', {
 
 export const permissionRelation = relations(permission, ({ one }) => {
 	return {
-		permissions: one(users, {
+		user: one(users, {
 			fields: [permission.userId],
 			references: [users.id]
 		})

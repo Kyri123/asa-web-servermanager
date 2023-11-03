@@ -1,3 +1,4 @@
+import { Permission } from '~/utils/enum';
 /* eslint-disable import/no-named-as-default-member */
 /* eslint-disable unused-imports/no-unused-vars */
 import { eq } from 'drizzle-orm';
@@ -17,6 +18,13 @@ export async function createSession(event: H3Event<EventHandlerRequest>, user: U
 		throw createError({
 			statusCode: 500,
 			statusMessage: 'JWT_SECRET_KEY not set!'
+		});
+	}
+
+	if (user.accountDisabled) {
+		throw createError({
+			statusCode: 403,
+			statusMessage: 'Account is not Active!'
 		});
 	}
 
@@ -75,4 +83,23 @@ export function parseSession(event: H3Event<EventHandlerRequest>) {
 			statusMessage: err.message
 		});
 	}
+}
+
+/**
+ * Check if the user has the given permission
+ * @param event The event to get the cookie from
+ * @param permission The permission to check for
+ */
+export function hasPermission(event: H3Event<EventHandlerRequest>, permission: Permission, ignoreAdmin: boolean = false) {
+	const session = parseSession(event);
+	if (session.permissions.includes(Permission.ADMIN) && !ignoreAdmin) {
+		return session;
+	}
+	if (!session.permissions.includes(permission)) {
+		throw createError({
+			statusCode: 403,
+			statusMessage: 'no permission!'
+		});
+	}
+	return session;
 }

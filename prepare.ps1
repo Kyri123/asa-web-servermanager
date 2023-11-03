@@ -10,6 +10,23 @@ function CommandExists {
     }
 }
 
+function MkDirSave {
+    param ($path)
+    try {
+        New-Item -Path $path -ItemType Directory
+        Write-Output "Created directory $path"
+        return $true
+    } catch {
+        return $false
+    }
+}
+
+MkDirSave "asa_server"
+MkDirSave "asa_server\backups"
+MkDirSave "asa_server\logs"
+MkDirSave "asa_server\data"
+MkDirSave "asa_server\steamCMD"
+
 if(!(CommandExists "npm")) {
     Write-Host -NoNewLine 'Node or NPM is not installed. Would you like to install it?';
     $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
@@ -34,19 +51,31 @@ if(!(CommandExists "yarn")) {
     Write-Output "yarn already installed (skipping)"
 }
 
-if(!(Test-Path -Path .\steamCMD)) {
+if(!(Test-Path -Path .\asa_server\steamCMD)) {
     Write-Output "Downloading SteamCMD"
     $WebClient.DownloadFile("https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip",".\steamcmd.zip")
 
     Write-Output "Extracting SteamCMD"
-    Expand-Archive .\steamcmd.zip -DestinationPath .\steamCMD
-    Remove-Item .\steamcmd.zip
+    Expand-Archive .\steamcmd.zip -DestinationPath .\asa_server\steamCMD
+    Remove-Item .\asa_server\steamcmd.zip
 
     Write-Output "Running SteamCMD to install and update"
-    .\steamCMD\steamcmd.exe +quit
+    .\asa_server\steamCMD\steamcmd.exe +quit
 } else {
     Write-Output "SteamCMD already installed (skipping)"
 }
 
+if(!(Test-Path -Path .\.env))  {
+    Write-Output "Creating .env file"
+    Copy-Item .\.env.example .\.env
+}
+
 yarn
 yarn run build
+
+Write-Output "-------------------------------------------------"
+Write-Output "Done!"
+Write-Output "Please edit the .env file for database connection"
+Write-Output "You can now run the server with 'yarn run start'"
+Write-Output "-------------------------------------------------"
+Pause

@@ -2,14 +2,15 @@ import { eq, or } from 'drizzle-orm';
 import { z } from 'zod';
 import { comparePassword } from '~/server/utils/auth/password';
 import { createSession } from '~/server/utils/auth/session';
+import { getBody } from '~/server/utils/requestHelper';
+
+const bodySchema = z.object({
+	username: z.string(),
+	password: z.string()
+});
 
 export default defineEventHandler(async (event) => {
-	const input = z
-		.object({
-			username: z.string(),
-			password: z.string()
-		})
-		.parse(await readBody(event));
+	const input = await getBody(event, bodySchema);
 
 	const user = await db
 		.select()

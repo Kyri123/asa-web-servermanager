@@ -6,7 +6,11 @@ export default defineNuxtConfig({
 	imports: {
 		dirs: ['composables/**', 'utils/**']
 	},
+	colorMode: {
+		preference: 'dark'
+	},
 	ui: {
+		icons: 'all',
 		global: true
 	},
 	pinia: {

@@ -43,7 +43,7 @@ export const serverActions = mysqlTable('server_actions', {
 	)
 });
 
-export const serverSettingsRelation = relations(serverActions, ({ one }) => {
+export const serverActionsRelation = relations(serverActions, ({ one }) => {
 	return {
 		server: one(server, {
 			fields: [serverActions.serverId],
