@@ -7,7 +7,12 @@ export const serverMods = mysqlTable('server_mods', {
 	serverId: bigint('server_id', { mode: 'number' })
 		.notNull()
 		.unique()
-		.references(() => server.id, { onDelete: 'cascade' }),
+		.references(
+			() => {
+				return server.id;
+			},
+			{ onDelete: 'cascade' }
+		),
 	modId: int('mod_id').notNull(),
 	isMapMod: boolean('is_map_mod').notNull().default(false),
 	modName: varchar('mod_name', { length: 255 }),
@@ -15,9 +20,11 @@ export const serverMods = mysqlTable('server_mods', {
 	lastUpdate: timestamp('last_update')
 });
 
-export const serverModsRelation = relations(serverMods, ({ one }) => ({
-	server: one(server, {
-		fields: [serverMods.serverId],
-		references: [server.id]
-	})
-}));
+export const serverModsRelation = relations(serverMods, ({ one }) => {
+	return {
+		server: one(server, {
+			fields: [serverMods.serverId],
+			references: [server.id]
+		})
+	};
+});

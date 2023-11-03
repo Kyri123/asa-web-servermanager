@@ -1,15 +1,19 @@
 <script setup lang="ts">
 	import type { NuxtError } from '@nuxt/types';
 
-	const $props = defineProps({
+	const props = defineProps({
 		error: {
 			type: Error as PropType<NuxtError>,
 			default: null
 		}
 	});
 
+	useHead({
+		title: `ASA-WM | Error ${props.error.statusCode}`
+	});
+
 	const $router = useRouter();
-	if (!$props.error) $router.push('/');
+	if (!props.error) $router.push('/');
 </script>
 
 <template>

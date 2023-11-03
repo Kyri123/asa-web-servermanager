@@ -13,21 +13,23 @@ export const server = mysqlTable('server', {
 	rconPort: int('rcon_port').notNull().unique()
 });
 
-export const serverRelation = relations(server, ({ one }) => ({
-	settings: one(serverSettings, {
-		fields: [server.id],
-		references: [serverSettings.serverId]
-	}),
-	schedule: one(serverScheduleSettings, {
-		fields: [server.id],
-		references: [serverScheduleSettings.serverId]
-	}),
-	actions: one(serverActions, {
-		fields: [server.id],
-		references: [serverActions.serverId]
-	}),
-	mods: one(serverMods, {
-		fields: [server.id],
-		references: [serverMods.serverId]
-	})
-}));
+export const serverRelation = relations(server, ({ one }) => {
+	return {
+		settings: one(serverSettings, {
+			fields: [server.id],
+			references: [serverSettings.serverId]
+		}),
+		schedule: one(serverScheduleSettings, {
+			fields: [server.id],
+			references: [serverScheduleSettings.serverId]
+		}),
+		actions: one(serverActions, {
+			fields: [server.id],
+			references: [serverActions.serverId]
+		}),
+		mods: one(serverMods, {
+			fields: [server.id],
+			references: [serverMods.serverId]
+		})
+	};
+});

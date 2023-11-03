@@ -11,18 +11,18 @@
 		"dev": "nuxi dev",
 		"start": "node .output/server/index.mjs",
 		"prepare": "husky install && nuxi prepare",
-		"postinstall": "pnpm run prepare",
+		"postinstall": "yarn run prepare",
 		"hook:prettier": "prettier --write .",
-		"hook:db": "pnpm run db:generate"
+		"hook:db": "yarn run db:generate"
 	},
 	"dependencies": {
-		"@iconify/json": "^2.2.135",
+		"@iconify/json": "^2.2.137",
 		"@nuxt/devtools": "^1.0.0",
 		"@nuxt/image": "^1.0.0",
 		"@nuxt/ui": "^2.10.0",
 		"@nuxtjs/eslint-config-typescript": "^12.1.0",
-		"@nuxtjs/tailwindcss": "^6.8.1",
 		"@pinia/nuxt": "^0.5.1",
+		"@unhead/vue": "^1.8.2",
 		"@vueuse/nuxt": "^10.5.0",
 		"cross-env": "^7.0.3",
 		"dotenv": "^16.3.1",
@@ -51,29 +51,27 @@
 		"@types/jsonwebtoken": "^9.0.4",
 		"@types/lodash": "^4.14.200",
 		"@types/node": "^18.16.0",
-		"@typescript-eslint/eslint-plugin": "^6.3.0",
-		"@typescript-eslint/parser": "^6.9.0",
+		"@typescript-eslint/eslint-plugin": "^6.9.1",
+		"@typescript-eslint/parser": "^6.9.1",
 		"autoprefixer": "^10.4.14",
 		"dotenv-cli": "^7.3.0",
 		"drizzle-kit": "^0.19.13",
 		"eslint": "^8.47.0",
-		"eslint-config-next": "^13.5.4",
 		"eslint-config-prettier": "^9.0.0",
 		"eslint-plugin-prettier": "^5.0.1",
 		"husky": "^8.0.3",
 		"jsonwebtoken": "^9.0.2",
-		"mysql2": "^3.6.2",
+		"mysql2": "^3.6.3",
 		"nuxi": "^3.9.1",
 		"postcss": "^8.4.27",
-		"prettier": "^3.0.0",
+		"prettier": "^3.0.3",
 		"prettier-plugin-organize-imports": "^3.2.3",
-		"prettier-plugin-tailwindcss": "^0.5.1",
+		"prettier-plugin-tailwindcss": "^0.5.6",
 		"tailwindcss": "^3.3.3",
 		"typescript": "^5.2.2",
 		"vue-tsc": "^1.8.22"
 	},
 	"ct3aMetadata": {
 		"initVersion": "7.22.0"
-	},
-	"packageManager": "pnpm@8.8.0"
+	}
 }

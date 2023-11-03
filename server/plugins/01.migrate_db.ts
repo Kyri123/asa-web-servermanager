@@ -27,12 +27,12 @@ export default defineNitroPlugin(async () => {
 		log('error', 'Please check if your database is reachable!', process.env.DATABASE_HOST, process.env.DATABASE_PORT);
 		log('error', 'Please check if your database user has the correct permissions!', process.env.DATABASE_USER);
 		log('error', 'Please check if your database has the correct schema!', process.env.DATABASE_DB);
-		await new Promise((resolve) =>
-			setTimeout(() => {
+		await new Promise((resolve) => {
+			return setTimeout(() => {
 				log('fatal', e.message);
 				resolve(null);
-			}, 100)
-		);
+			}, 100);
+		});
 	}
 	log('backend', 'Database migrated!');
 });

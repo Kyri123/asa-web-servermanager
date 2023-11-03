@@ -7,14 +7,21 @@ export const serverSettings = mysqlTable('server_settings', {
 	serverId: bigint('server_id', { mode: 'number' })
 		.notNull()
 		.unique()
-		.references(() => server.id, { onDelete: 'cascade' }),
+		.references(
+			() => {
+				return server.id;
+			},
+			{ onDelete: 'cascade' }
+		),
 	map: varchar('map', { length: 255 }),
 	maxPlayers: smallint('max_players')
 });
 
-export const serverSettingsRelation = relations(serverSettings, ({ one }) => ({
-	server: one(server, {
-		fields: [serverSettings.serverId],
-		references: [server.id]
-	})
-}));
+export const serverSettingsRelation = relations(serverSettings, ({ one }) => {
+	return {
+		server: one(server, {
+			fields: [serverSettings.serverId],
+			references: [server.id]
+		})
+	};
+});

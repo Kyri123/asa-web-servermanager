@@ -4,6 +4,7 @@ import { comparePassword } from '~/server/utils/auth/password';
 import { createSession } from '~/server/utils/auth/session';
 
 export default defineEventHandler(async (event) => {
+	console.log('event');
 	const input = z
 		.object({
 			username: z.string(),

@@ -1,7 +1,7 @@
 /* eslint-disable unused-imports/no-unused-vars */
 import { eq } from 'drizzle-orm';
 import type { EventHandlerRequest, H3Event } from 'h3';
-import { sign, verify } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import moment from 'moment-timezone';
 import { db, permission } from '~/server/utils/db';
 
@@ -25,14 +25,16 @@ export async function createSession(event: H3Event<EventHandlerRequest>, user: U
 		.from(permission)
 		.where(eq(permission.userId, user.id))
 		.then((rows) => {
-			return rows.map((row) => row.permission);
+			return rows.map((row) => {
+				return row.permission;
+			});
 		});
 
 	// we don't want to send the password or seed to the client
 	const { password, seed, ...userdata } = user;
 
 	// create token
-	const token = sign({ ...userdata, permissions }, process.env.JWT_SECRET_KEY, {
+	const token = jwt.sign({ ...userdata, permissions }, process.env.JWT_SECRET_KEY, {
 		expiresIn: `${expiresIn}d`
 	});
 
@@ -64,7 +66,7 @@ export function parseSession(event: H3Event<EventHandlerRequest>) {
 	}
 
 	try {
-		return verify(token, process.env.JWT_SECRET_KEY) as SessionUser;
+		return jwt.verify(token, process.env.JWT_SECRET_KEY) as SessionUser;
 	} catch (err: any) {
 		throw createError({
 			statusCode: 403,

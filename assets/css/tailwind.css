@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
+/** {
 	scrollbar-width: thin;
 	scrollbar-color: var(--secondary) var(--primary);
 }
@@ -20,4 +20,4 @@
 	background-color: var(--secondary);
 	border-radius: 20px;
 	border: var(--width) solid var(--primary);
-}
+}*/

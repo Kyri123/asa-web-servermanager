@@ -24,22 +24,34 @@ export const serverActions = mysqlTable('server_actions', {
 	serverId: bigint('server_id', { mode: 'number' })
 		.notNull()
 		.unique()
-		.references(() => server.id, { onDelete: 'cascade' }),
+		.references(
+			() => {
+				return server.id;
+			},
+			{ onDelete: 'cascade' }
+		),
 	action: varchar('action', { length: 255 }).$type<ServerAction>(),
 	state: varchar('state', { length: 255 }).$type<ServerActionState>(),
 	message: varchar('message', { length: 255 }).default('Waiting for next execution and free runner...'),
 	parameters: varchar('parameters', { length: 255 }).default('[]'),
 	canceled: boolean('canceled').default(false),
-	userId: bigint('user_id', { mode: 'number' }).references(() => users.id, { onDelete: 'set null' })
+	userId: bigint('user_id', { mode: 'number' }).references(
+		() => {
+			return users.id;
+		},
+		{ onDelete: 'set null' }
+	)
 });
 
-export const serverSettingsRelation = relations(serverActions, ({ one }) => ({
-	server: one(server, {
-		fields: [serverActions.serverId],
-		references: [server.id]
-	}),
-	user: one(users, {
-		fields: [serverActions.userId],
-		references: [users.id]
-	})
-}));
+export const serverSettingsRelation = relations(serverActions, ({ one }) => {
+	return {
+		server: one(server, {
+			fields: [serverActions.serverId],
+			references: [server.id]
+		}),
+		user: one(users, {
+			fields: [serverActions.userId],
+			references: [users.id]
+		})
+	};
+});

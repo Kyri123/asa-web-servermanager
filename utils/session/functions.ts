@@ -1,30 +1,26 @@
-import jwt from 'jsonwebtoken';
 import { jwtDecode } from 'jwt-decode';
-import { cookies } from 'next/headers';
-import { env } from '~/env.cjs';
-import { type SessionUser } from '~/server/db/schema/auth';
+import type { SessionUser } from '~/server/utils/db';
 
-export function getSession(token?: string): SessionUser | null {
-	if (!token) {
-		const cookieStore = cookies();
-		token = cookieStore.get('session')?.value;
-	}
+/**
+ * get the session for SSR and Clientside
+ */
+export function getSession(token?: string | null): SessionUser | null {
+	token = token ?? useCookie('token')?.value;
+
 	if (!token) return null;
-
 	try {
-		if (window !== undefined) {
-			try {
-				return jwtDecode<SessionUser>(token);
-			} catch (err) {
-				return null;
-			}
-		}
-	} catch (err) {}
-
-	try {
-		return jwt.verify(token, env.JWT_SECRET_KEY) as SessionUser;
-	} catch (err) {
-		console.log(err);
+		const usr = jwtDecode<SessionUser>(token);
+		if (!usr.exp || usr.exp < Date.now() / 1000) return null;
+		return usr;
+	} catch (e) {
 		return null;
 	}
+}
+
+/**
+ * destroy the session for SSR and Clientside
+ */
+export function destorySession() {
+	const userIdCookie = useCookie('token');
+	userIdCookie.value = null;
 }

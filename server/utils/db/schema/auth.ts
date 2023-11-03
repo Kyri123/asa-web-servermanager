@@ -1,5 +1,6 @@
 import { relations } from 'drizzle-orm';
 import { bigint, boolean, mysqlTable, timestamp, varchar } from 'drizzle-orm/mysql-core';
+import type { JwtPayload } from 'jsonwebtoken';
 import type { Permission } from '~/types/enum';
 import { serverActions } from './serverActions';
 
@@ -14,14 +15,16 @@ export const users = mysqlTable('user', {
 	accountDisabled: boolean('account_disabled').default(false)
 });
 
-export const usersRelation = relations(users, ({ many }) => ({
-	permissions: many(permission),
-	actions: many(serverActions)
-}));
+export const usersRelation = relations(users, ({ many }) => {
+	return {
+		permissions: many(permission),
+		actions: many(serverActions)
+	};
+});
 
 export type User = typeof users.$inferSelect;
 export type NewUser = typeof users.$inferInsert;
-export type SessionUser = Omit<User, 'password' | 'seed'> & { permissions: Permission[] };
+export type SessionUser = Omit<User, 'password' | 'seed'> & { permissions: Permission[] } & JwtPayload;
 
 export const permission = mysqlTable('permission', {
 	id: bigint('id', { mode: 'number' }).primaryKey().autoincrement(),
@@ -29,12 +32,14 @@ export const permission = mysqlTable('permission', {
 	permission: varchar('permission', { length: 255 }).notNull().$type<Permission>()
 });
 
-export const permissionRelation = relations(permission, ({ one }) => ({
-	permissions: one(users, {
-		fields: [permission.userId],
-		references: [users.id]
-	})
-}));
+export const permissionRelation = relations(permission, ({ one }) => {
+	return {
+		permissions: one(users, {
+			fields: [permission.userId],
+			references: [users.id]
+		})
+	};
+});
 
 export type PermissionData = typeof permission.$inferSelect;
 export type NewPermission = typeof permission.$inferInsert;

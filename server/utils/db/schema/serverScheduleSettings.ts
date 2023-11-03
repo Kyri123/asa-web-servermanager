@@ -7,7 +7,12 @@ export const serverScheduleSettings = mysqlTable('server_schedule_settings', {
 	serverId: bigint('server_id', { mode: 'number' })
 		.notNull()
 		.unique()
-		.references(() => server.id, { onDelete: 'cascade' }),
+		.references(
+			() => {
+				return server.id;
+			},
+			{ onDelete: 'cascade' }
+		),
 	updateEnabled: boolean('update_enabled').default(true),
 	updateCron: varchar('update_frequency', { length: 255 }).default('*/15 * * * *'),
 	updateAlertEnabled: boolean('restart_alert_enabled').default(true),
@@ -19,9 +24,11 @@ export const serverScheduleSettings = mysqlTable('server_schedule_settings', {
 	backupsAlertEnabled: boolean('backups_alert_enabled').default(true)
 });
 
-export const serverScheduleSettingsRelation = relations(serverScheduleSettings, ({ one }) => ({
-	server: one(server, {
-		fields: [serverScheduleSettings.serverId],
-		references: [server.id]
-	})
-}));
+export const serverScheduleSettingsRelation = relations(serverScheduleSettings, ({ one }) => {
+	return {
+		server: one(server, {
+			fields: [serverScheduleSettings.serverId],
+			references: [server.id]
+		})
+	};
+});
