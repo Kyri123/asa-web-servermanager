@@ -3,7 +3,7 @@
 </script>
 
 <template>
-	<div class="flex h-screen w-screen flex-col overflow-hidden bg-gray-100 dark:bg-gray-900">
+	<div class="flex h-screen w-screen flex-col overflow-hidden dark:bg-gray-900">
 		<div class="border py-2 dark:border-gray-800">
 			<UContainer>
 				<div class="flex items-center gap-3 p-1">

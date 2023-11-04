@@ -1,6 +1,12 @@
 <script setup lang="ts">
+	import { permissionMiddleware } from '~/middleware/permission';
+
 	useHead({
 		title: 'ASA-WM | Server Management'
+	});
+
+	definePageMeta({
+		middleware: permissionMiddleware(Permission.ServerManagement, '/user/management')
 	});
 </script>
 

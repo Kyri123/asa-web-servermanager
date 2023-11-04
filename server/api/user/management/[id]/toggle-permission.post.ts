@@ -9,7 +9,7 @@ const bodySchema = z.object({
 });
 
 export default defineEventHandler(async (event) => {
-	hasPermission(event, Permission.UserManagement);
+	hasPermission(event, Permission.UserManagementPermissions);
 	const { permission: perm } = await getBody(event, bodySchema);
 	const id = parseInt(event.context.params?.id ?? 'NaN');
 

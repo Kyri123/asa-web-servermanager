@@ -5,12 +5,16 @@
 		{
 			label: 'Dashboard',
 			icon: 'i-heroicons-home',
-			to: '/'
+			to: '/',
+			exact: false,
+			exactMatch: false
 		},
 		{
 			label: 'User Management',
 			icon: 'i-heroicons-users',
-			to: '/user/management'
+			to: '/user/management',
+			exact: false,
+			exactMatch: false
 		}
 	];
 
@@ -18,7 +22,9 @@
 		{
 			label: 'Server Management',
 			icon: 'i-heroicons-server',
-			to: '/server/management'
+			to: '/server/management',
+			exact: false,
+			exactMatch: false
 		}
 	];
 

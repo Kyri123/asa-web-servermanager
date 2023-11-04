@@ -1,9 +1,8 @@
-import { sql } from 'drizzle-orm';
 import { hasPermission } from '~/server/utils/auth/session';
 import { Permission } from '~/utils/enum';
 
 export default defineEventHandler(async (event) => {
-	hasPermission(event, Permission.UserManagementToggle);
+	hasPermission(event, Permission.UserManagement);
 	const id = parseInt(event.context.params?.id ?? 'NaN');
 
 	if (!Number.isInteger(id)) {
@@ -13,9 +12,18 @@ export default defineEventHandler(async (event) => {
 		});
 	}
 
-	await db.execute(sql`UPDATE ${users} SET ${users.accountDisabled} = !${users.accountDisabled} WHERE ${users.id} = ${id}`);
+	const user = await db.query.users.findFirst({
+		where: (u, { eq }) => {
+			return eq(u.id, id);
+		},
+		columns: {
+			password: false,
+			seed: false
+		},
+		with: {
+			permissions: true
+		}
+	});
 
-	return {
-		success: true
-	};
+	return user;
 });

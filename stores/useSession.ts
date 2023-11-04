@@ -1,3 +1,4 @@
+import { Permission } from '~/utils/enum';
 export type LoginOptions = {
 	username: string;
 	password: string;
@@ -62,5 +63,11 @@ export const useSession = defineStore('darkMode', () => {
 		});
 	}
 
-	return { token, user, logout, login, register };
+	function has(permission: Permission) {
+		if (!user.value) return false;
+		if (user.value.permissions.includes(Permission.ADMIN)) return true;
+		return user.value.permissions.includes(permission);
+	}
+
+	return { token, user, logout, login, register, has };
 });
