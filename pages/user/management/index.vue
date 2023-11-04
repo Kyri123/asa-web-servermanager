@@ -2,7 +2,6 @@
 	import type { DropdownItem } from '@nuxt/ui/dist/runtime/types';
 	import moment from 'moment-timezone';
 	import { computed } from 'vue';
-	import { permissionMiddleware } from '~/middleware/permission';
 
 	useHead({
 		title: 'ASA-WM | User Management'

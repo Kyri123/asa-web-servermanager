@@ -4,7 +4,7 @@ export default defineNuxtConfig({
 	modules: ['@pinia/nuxt', '@vueuse/nuxt', 'nuxt-typed-router', 'nuxt-icon', '@nuxt/ui', '@nuxt/image'],
 	devtools: { enabled: false },
 	imports: {
-		dirs: ['composables/**', 'utils/**']
+		dirs: ['composables/**', 'utils/**', 'middleware/**']
 	},
 	colorMode: {
 		preference: 'dark'

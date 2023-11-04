@@ -1,6 +1,4 @@
 <script setup lang="ts">
-	import { permissionMiddleware } from '~/middleware/permission';
-
 	useHead({
 		title: 'ASA-WM | Server Management'
 	});
