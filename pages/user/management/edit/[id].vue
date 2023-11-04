@@ -80,12 +80,6 @@
 		};
 	});
 
-	const hasSuper = computed(() => {
-		return !!data.value?.permissions.some((e) => {
-			return e.permission === Permission.ADMIN;
-		});
-	});
-
 	const busy = ref(false);
 	function toggleKey(permission: string) {
 		if (busy.value) return;
