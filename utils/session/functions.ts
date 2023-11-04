@@ -24,3 +24,12 @@ export function destorySession() {
 	const userIdCookie = useCookie('token');
 	userIdCookie.value = null;
 }
+
+/**
+ * destroy the session for SSR and Clientside
+ */
+export async function testSession() {
+	const headers = useRequestHeaders(['cookie']);
+	const { valid } = await $fetch('/api/auth/validate', { headers });
+	return valid;
+}

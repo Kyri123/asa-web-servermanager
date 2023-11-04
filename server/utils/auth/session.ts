@@ -59,8 +59,9 @@ export function destorySession(event: H3Event<EventHandlerRequest>) {
  *  The user object that will be stored in the session
  * @param event The event to get the cookie from
  */
-export function parseSession(event: H3Event<EventHandlerRequest>) {
+export function parseSession(event: H3Event<EventHandlerRequest>, noThrow = false): SessionUser | null {
 	if (!process.env.JWT_SECRET_KEY) {
+		if (noThrow) return null;
 		throw createError({
 			statusCode: 500,
 			statusMessage: 'JWT_SECRET_KEY not set!'
@@ -69,6 +70,7 @@ export function parseSession(event: H3Event<EventHandlerRequest>) {
 
 	const token = getCookie(event, 'token');
 	if (!token) {
+		if (noThrow) return null;
 		throw createError({
 			statusCode: 403,
 			statusMessage: 'no session found!'
@@ -78,6 +80,7 @@ export function parseSession(event: H3Event<EventHandlerRequest>) {
 	try {
 		return jwt.verify(token, process.env.JWT_SECRET_KEY) as SessionUser;
 	} catch (err: any) {
+		if (noThrow) return null;
 		throw createError({
 			statusCode: 403,
 			statusMessage: err.message
