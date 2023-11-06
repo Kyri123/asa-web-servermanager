@@ -13,8 +13,8 @@ export const serverSettings = mysqlTable('server_settings', {
 			},
 			{ onDelete: 'cascade' }
 		),
-	map: varchar('map', { length: 255 }),
-	maxPlayers: smallint('max_players')
+	map: varchar('map', { length: 255 }).default('TheIsland_WP'),
+	maxPlayers: smallint('max_players').default(70)
 });
 
 export const serverSettingsRelation = relations(serverSettings, ({ one }) => {

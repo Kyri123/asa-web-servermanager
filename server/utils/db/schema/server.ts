@@ -7,11 +7,14 @@ import { serverSettings } from './serverSettings';
 
 export const server = mysqlTable('server', {
 	id: bigint('id', { mode: 'number' }).primaryKey().autoincrement(),
-	serverName: varchar('name', { length: 255 }),
+	serverName: varchar('name', { length: 255 }).notNull(),
 	queryPort: int('query_port').notNull().unique(),
 	gamePort: int('game_port').notNull().unique(),
 	rconPort: int('rcon_port').notNull().unique()
 });
+
+export type ServerType = typeof server.$inferSelect;
+export type ServerInsertType = typeof server.$inferInsert;
 
 export const serverRelation = relations(server, ({ one }) => {
 	return {
